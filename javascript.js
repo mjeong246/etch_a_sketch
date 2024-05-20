@@ -31,7 +31,12 @@ function clearGrid() {
 }
 
 function resize(event) {
-    let newGridSize = prompt("Please enter a grid size from 1 to 64 (inclusive)");
+    let newGridSize = null;
+    while (typeof(newGridSize) != "number" || !(newGridSize >= 1 && newGridSize <= 64)) {
+        newGridSize = prompt("Please enter a grid size from 1 to 64 (inclusive)");
+        newGridSize = Number(newGridSize);
+    }
+
     gridSize = newGridSize;
     clearGrid();
     makeGrid();
