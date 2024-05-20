@@ -1,7 +1,8 @@
 //set up references
 var gridContainer = document.querySelector(".gridContainer");
 var resizeButton = document.querySelector(".resizeButton");
-var gridSize = 64;
+var resetButton = document.querySelector(".resetButton");
+var gridSize = 16;
 
 //makes the grie (as a flexbox)
 function makeGrid() {
@@ -21,18 +22,30 @@ function makeGrid() {
 function hoverFill (event) {
     var cell = event.target;
     cell.style.backgroundColor = "black";
-    console.log("CHANGED");
 }
 
-makeGrid();
-
-
-resizeButton.addEventListener("click", resize);
+function clearGrid() {
+    while (gridContainer.lastChild != null) {
+        gridContainer.removeChild(gridContainer.lastChild);
+    }
+}
 
 function resize(event) {
-    console.log("Resize called");
+    let newGridSize = prompt("Please enter a grid size from 1 to 64 (inclusive)");
+    gridSize = newGridSize;
+    clearGrid();
+    makeGrid();
 }
 
+function reset(event) {
+    clearGrid();
+    makeGrid();
+}
+
+resizeButton.addEventListener("click", resize);
+resetButton.addEventListener("click", reset);
+
+makeGrid();
 
 
 
